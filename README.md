@@ -6,31 +6,37 @@ My Postman
 
 There are a few ways.
 
-### A "Get Token" request + a env variable
+### A token post request + a env variable (not recommended)
 
-![](image/README/get_token_01.png)
+![get_token_01](image/README/get_token_01.png)
 
-![](image/README/get_token_02.png)
+![get_token_02](image/README/get_token_02.png)
 
 username <-> client ID
 
 password <-> client secret
 
-![](image/README/get_token_03.png)
+![get_token_03](image/README/get_token_03.png)
 
-![](image/README/get_token_04.png)
+![get_token_04](image/README/get_token_04.png)
+
+![use_token](image/README/use_token.png)
+
+### Get token in the Postman script (Recommended)
 
 Postman script:
 
-```
+```dos
 var jsonData = JSON.parse(responseBody);
 postman.setGlobalVariable("access_token", jsonData.access_token);
 ```
 
-Note: based on the version, the syntax may have different variants.
+The toke can be saved in 3 scopes for re-use purpose.
 
-![](image/README/use_token.png)
+- Global level
+- Collection level
+- Request level
 
-### Get token in the Postman script (in collection level)
+Note:
 
-### Get token in the Postman script (in request level)
+The syntax may have different variants for different Postman versions.
