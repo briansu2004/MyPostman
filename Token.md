@@ -2,7 +2,7 @@
 
 There are a few ways.
 
-## A token post request + a env variable (not recommended)
+## A token post request + an env variable (not recommended)
 
 ![get_token_01](image/README/get_token_01.png)
 
@@ -36,3 +36,40 @@ The toke can be saved in 3 scopes for re-use purpose.
 Note:
 
 The syntax may have different variants for different Postman versions.
+
+```postman
+const tokenUrl = 'https://<token_url>';
+const grant_type = 'client_credentials';
+const scope = '<scope>';
+const clientId = "<clientID>";
+const clientSecret = "<clientSecret>";
+
+const getTokenRequest = {
+  method: 'POST',
+  url: tokenUrl,
+  header: 'Content-Type:application/x-www-form-urlencoded',
+  body: {
+      mode: 'urlencoded',
+      urlencoded: [
+          { key: 'grant_type', value: grant_type },
+          { key: 'scope', value: scope },
+          { key: 'client_id', value: clientId },
+          { key: 'client_secret', value: clientSecret }
+      ]
+  }
+};
+
+pm.sendRequest(getTokenRequest, (err, response) => {
+  const jsonResponse = response.json();
+  const newAccessToken = jsonResponse.access_token;
+  pm.variables.set('access_token', newAccessToken);
+}, (err, res) => { 
+    console.log("[Request] res: ", res);
+    console.log("[Request] access_token: ", res.json().access_token);
+    pm.collectionVariables.set("access_token", res.json().access_token) 
+});
+```
+
+![1679672927991](image/Token/1679672927991.png)
+
+![1679672938565](image/Token/1679672938565.png)
