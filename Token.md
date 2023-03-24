@@ -61,15 +61,13 @@ const getTokenRequest = {
 
 pm.sendRequest(getTokenRequest, (err, response) => {
   const jsonResponse = response.json();
-  const newAccessToken = jsonResponse.access_token;
-  pm.variables.set('access_token', newAccessToken);
-}, (err, res) => { 
-    console.log("[Request] res: ", res);
-    console.log("[Request] access_token: ", res.json().access_token);
-    pm.collectionVariables.set("access_token", res.json().access_token) 
+  const access_token = jsonResponse.access_token;
+  console.log("[Request] jsonResponse: ", jsonResponse);
+  console.log("[Request] access_token: ", access_token);
+  pm.variables.set('access_token', access_token);
 });
 ```
 
-![1679672927991](image/Token/1679672927991.png)
+![1679673822793](image/Token/1679673822793.png)
 
-![1679672938565](image/Token/1679672938565.png)
+![1679673937469](image/Token/1679673937469.png)
